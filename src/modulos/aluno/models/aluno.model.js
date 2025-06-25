@@ -14,7 +14,7 @@ const Aluno = sequelize.define(
       validate: {
         is: {
           args: /^[A-Za-z]\d{8}$/,
-          msg: "A matricula deve iniciar com uma letra e ter 8 números!",
+          msg: "A matricula deve iniciar com uma letra  e 8 números!",
         },
       },
     },
@@ -38,7 +38,7 @@ const Aluno = sequelize.define(
     },
   },
   {
-    modelName: "aluno",
+    tableName: "aluno",
     createdAt: "criado_em",
     updatedAt: "atualizado_em",
   }

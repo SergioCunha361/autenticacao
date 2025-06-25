@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
-    logging: true, // opcional
+    logging: true, // opcional mostra todas criaçoes dos bancos se false não aparece quando node index
   }
 );
 
