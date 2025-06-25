@@ -1,0 +1,12 @@
+DB_USER=postgres
+DB_HOST=localhost
+DB_DATABASE=db_pa
+DB_PASSWORD=Porto321@
+DB_PORT=5432
+PORTA=3001
+
+NODE_ENV=development
+TENPO_ACESS_TOKEN="2m"
+TEMPO_REFRESH_TOKEN="24h"
+SECRET_KEY=35lejrndj89rendlpapebjkooio
+JWT_REFRESH_KEY=wlk045lfn36dmweudjrtns6e34lke294jfht
