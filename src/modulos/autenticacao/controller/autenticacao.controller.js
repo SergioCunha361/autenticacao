@@ -42,6 +42,7 @@ class AutenticacaoController {
       }
       const dadosAluno = {
         nome: usuario.nome,
+        matricula: usuario.matricula,
         papel: "aluno",
       };
       // gerando os tokens
@@ -58,7 +59,8 @@ class AutenticacaoController {
         msg: "Usuario logado com sucesso",
         tokenAcesso,
         nome: usuario.nome,
-        papel: "aluno",
+        matricula: usuario.matricula,
+        papel: "aluno"
       });
     } catch (error) {
       res.status(500).json({
@@ -83,6 +85,7 @@ class AutenticacaoController {
         }
         const dadosAluno = {
           nome: usuario.nome,
+          usuario: usuario.matricula,
           papel: "aluno",
         };
         // gerando o novo token
@@ -94,11 +97,20 @@ class AutenticacaoController {
   }
   static async sair(req, res) {
     try {
-      res.status(200).json({msg: "Logout realizado com sucesso"});
+      res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "development",
+        sameSite: "strict",
+      });
+      res.status(200).json({ msg: "Logout realizado com sucesso" });
     } catch (error) {
-        res.status(500).json({msg: 'Erro interno do servidor. Por favor, tente mais tarde.', erro: error.message})
+      res.status(500).json({
+        msg: "Erro interno do servidor. Por favor, tente mais tarde.",
+        erro: error.message
+      });
     }
   }
 }
 
 module.exports = AutenticacaoController;
+
