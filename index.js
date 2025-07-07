@@ -1,9 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors')
+const cookieParser = require('cookie-parser');
 const { sequelize } = require('./src/config/configDB');
 const authRoute = require('./src/modulos/autenticacao/routes/autenticacao.route')
 const alunoRoute = require('./src/modulos/aluno/routes/aluno.route')
+
+
+
+
 // Configuração do banco de dados
 dotenv.config(); // Carrega variáveis de ambiente do arquivo .env
 
@@ -13,6 +18,8 @@ app.use(cors({
     credentials: true               // permite enviar cookies (como refreshToken)
 }));
 
+
+app.use(cookieParser());
 app.use(express.json());
 
 // rotas de aluno

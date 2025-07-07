@@ -50,11 +50,19 @@ class AutenticacaoController {
       const refreshToken = AutenticacaoController.gerarRefressToken(dadosAluno);
 
       res.cookie("refreshToken", refreshToken, {
-        httpOnly: false,
-        secure: process.env.NODE_ENV,
-        sameStrict: "strict",
-        maxAge: 1 * 24, // 1 dia
-      });
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",  // ✅ forma correta
+      maxAge: 24 * 60 * 60 * 1000
+});
+
+      // res.cookie("refreshToken", refreshToken, {
+      //   httpOnly: false,
+      //   secure: process.env.NODE_ENV,
+      //   sameStrict: "strict",
+      //   maxAge: 1 * 24, // 1 dia
+      // });
+
       res.status(200).json({
         msg: "Usuario logado com sucesso",
         tokenAcesso,
@@ -78,7 +86,7 @@ class AutenticacaoController {
     }
     jwt.verify(
       refreshToken,
-      process.env.JWT_REFRESH_SECRET,
+      process.env.JWT_REFRESH_KEY,
       (erro, usuario) => {
         if (erro) {
           return res.status(403).json({ msg: "Refresh Token invalido!" });
